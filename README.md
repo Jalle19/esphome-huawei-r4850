@@ -1,7 +1,5 @@
 # esphome-huawei-r4850
 
-[![License][license-shield]](LICENSE)
-
 ESPHome component to control and read values from Huawei R48xx power supplies via CAN bus.
 
 Fork of [mb-software/esphome-huawei-r4850](https://github.com/mb-software/esphome-huawei-r4850).
@@ -141,3 +139,15 @@ A full example containing most of these settings can be found in [huawei_r4850.y
 
 
 [license-shield]: https://img.shields.io/github/license/patagonaa/esphome-huawei-r4850.svg?style=for-the-badge
+
+## Support
+
+Please consider donating (via GitHub Sponsors) if this project is useful to you.
+
+You can also support this project in other ways:
+
+- by reporting bugs (via issues)
+- by requesting features (via issues/discussions)
+- by contributing code directly (via pull requests)
+
+AI-generated contributions (code or issues) are not welcome and will not be considered.
