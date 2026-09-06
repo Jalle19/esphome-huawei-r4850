@@ -22,6 +22,8 @@ static const uint8_t R48xx_CMD_CONTROL = 0x80;
 static const uint8_t R48xx_CMD_REGISTER_GET = 0x82;
 static const uint8_t R48xx_CMD_UNSOLICITED = 0x11;
 
+static const uint16_t R48XX_DATA_STATUS1 = 0x001;
+static const uint16_t R48XX_DATA_STANDBY = 0x132;
 static const uint16_t R48xx_DATA_INPUT_POWER = 0x170;
 static const uint16_t R48xx_DATA_INPUT_FREQ = 0x171;
 static const uint16_t R48xx_DATA_INPUT_CURRENT = 0x172;
@@ -338,6 +340,15 @@ void HuaweiR4850Component::on_frame(uint32_t can_id, bool extended_id, bool rtr,
 #ifdef USE_BINARY_SENSOR
       this->publish_sensor_state_(canbus_connectivity_binary_sensor_, true);
 #endif // USE_BINARY_SENSOR
+    }
+
+    // Standby state is sent regularly through unsolicited messages. We use
+    // this to tell the standby switch what its status should be.
+    if (register_id == R48XX_DATA_STATUS1) {
+      for (auto &input : this->registered_inputs_) {
+        std::vector<uint8_t> data = {0x00, message[3], 0x00, 0x00, 0x00, 0x00};
+        input->handle_update(R48XX_DATA_STANDBY, data);
+      }
     }
   }
 }
